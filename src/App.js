@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { Switch, Route, HashRouter } from 'react-router-dom';
+import Discovery from './views/Discovery/Index'
+import My from './views/My'
+import Friends from './views/Friends'
+import Index from './views/Index';
+import Recommend from './views/Discovery/Recmmend';
+import Rank from './views/Discovery/Rank';
+import PlayList from './views/Common/PlayList';
+import Album from './views/Common/Album';
+import Song from './views/Common/Song';
+import Singer from './views/Discovery/Singer';
+import PageNotFound from './views/404';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <HashRouter>
+        <Index>
+          <Switch> {/* Child of Index */}
+            <Route exact path="/my" component={My}></Route>
+            <Route exact path="/friends" component={Friends}></Route>
+            <Route path="/">
+              {/* 发现音乐 */}
+              <Discovery>
+                <Switch> {/* Child of Discovery */}
+                  <Route exact path="/" component={Recommend}></Route>
+                  <Route exact path="/rank" component={Rank}></Route>
+                  <Route exact path="/playlist/:id" component={PlayList}></Route>
+                  <Route exact path="/album/:id" component={Album}></Route>
+                  <Route exact path="/song/:id" component={Song}></Route>
+                  <Route exact path="/singer" component={Singer}></Route>
+                  <Route component={PageNotFound}></Route>
+                </Switch>
+              </Discovery>
+            </Route>
+          </Switch>
+        </Index>
+      </HashRouter>
+    );
+  }
 }
 
 export default App;

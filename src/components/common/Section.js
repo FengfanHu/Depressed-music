@@ -1,0 +1,23 @@
+import React from 'react';
+import { PageHeader, Divider, Skeleton } from 'antd';
+import { CustomerServiceTwoTone } from '@ant-design/icons';
+import './Section.scss'
+
+function Section(props) {
+    return (
+        <PageHeader
+            title={props.title}
+            avatar={{ icon: <CustomerServiceTwoTone />, style: {backgroundColor: '#fff'} }}>
+                <Skeleton loading={props.list.length === 0}>
+                    {props.children}
+                </Skeleton>
+            {
+                props.last
+                ? <Divider style={{ fontSize: '12px', color: '#999999' }}>到底了 ╮(￣▽￣"")╭</Divider>
+                : <Divider style={{ backgroundColor: '#9bc5fb', height: 2}}></Divider>
+            }
+        </PageHeader>
+    )
+}
+
+export default Section;

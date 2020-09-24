@@ -1,0 +1,15 @@
+@mixin horizontal_padding($propotion: 250px) {
+  padding: 0px $propotion; 
+}
+.layout {
+  min-height: 100vh;
+  .header-wrap {
+    background-color: #ffffff;
+    box-shadow: 0 3px 16px rgba(#141414, .1);
+    border-bottom: 4px solid #1890ff;
+    @include horizontal_padding();
+  }
+  .content-wrap {
+    @include horizontal_padding();
+  }
+}

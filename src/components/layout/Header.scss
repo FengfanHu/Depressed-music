@@ -1,0 +1,27 @@
+.header-content {
+    width: 900px;
+    margin: auto;
+    padding: auto;
+    h1 {
+        margin-bottom: 0px;
+        a {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: #434343;
+        }
+    }
+    
+    .menu {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        li {
+            border: none !important;
+        }
+    }
+    
+    .search {
+        max-width: 150px;
+        min-width: 50px;
+        margin-right: 10px;
+    }
+}
