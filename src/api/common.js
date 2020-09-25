@@ -16,6 +16,14 @@ export const albumDetail = (id) => request.request({
     }
 })
 
+export const MVDetail = (id) => request.request({
+    method: 'GET',
+    url: '/mv/url',
+    params: {
+        id
+    }
+})
+
 export const songDetail = (ids) => request.request({
     method: 'GET',
     url: '/song/detail',

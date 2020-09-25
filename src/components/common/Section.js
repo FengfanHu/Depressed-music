@@ -1,13 +1,12 @@
 import React from 'react';
 import { PageHeader, Divider, Skeleton } from 'antd';
-import { CustomerServiceTwoTone } from '@ant-design/icons';
 
 function Section(props) {
     return (
         <PageHeader
             style={{ padding: '10px 30px' }}
             title={props.title}
-            avatar={{ icon: <CustomerServiceTwoTone />, style: {backgroundColor: '#fff'} }}>
+            avatar={{ icon: props.icon, style: {backgroundColor: '#fff'} }}>
                 <Skeleton loading={props.list.length === 0}>
                     {props.children}
                 </Skeleton>

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { playlistDetail } from '../../api/common';
 import TracksSection from '../../components/discovery/TracksSection';
 import PlaylistHeader from '../../components/discovery/PlaylistHeader';
+import { CustomerServiceTwoTone } from '@ant-design/icons';
 
 class PlayList extends Component {
     constructor() {
@@ -40,7 +41,7 @@ class PlayList extends Component {
         return (
             <Fragment>
                 <PlaylistHeader {...headerProps}></PlaylistHeader>
-                <TracksSection title="歌曲列表" list={tracks} ></TracksSection>
+                <TracksSection title="歌曲列表" list={tracks} icon={<CustomerServiceTwoTone />} ></TracksSection>
             </Fragment>
         )
     }

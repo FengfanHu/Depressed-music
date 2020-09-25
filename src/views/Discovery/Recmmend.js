@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { recommend, personalizedList, personalizedNewSong, newAlbum } from '../../api/discovery';
 import { Carousel, Image, Skeleton } from 'antd';
 import RecommendSection from '../../components/discovery/RecommendSection';
+
 class Recommend extends Component {
     constructor() {
         super()

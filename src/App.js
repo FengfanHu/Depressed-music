@@ -10,6 +10,7 @@ import PlayList from './views/Common/PlayList';
 import Album from './views/Common/Album';
 import Song from './views/Common/Song';
 import Artist from './views/Common/Artist';
+import MV from './views/Common/MV';
 import PageNotFound from './views/404';
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
             <Route exact path="/my" component={My}></Route>
             <Route exact path="/friends" component={Friends}></Route>
             <Route path="/">
-              {/* 发现音乐 */}
+              {/* 发现音乐模版 */}
               <Discovery>
                 <Switch> {/* Child of Discovery */}
                   <Route exact path="/" component={Recommend}></Route>
@@ -30,6 +31,7 @@ class App extends Component {
                   <Route exact path="/album/:id" component={Album}></Route>
                   <Route exact path="/song/:id" component={Song}></Route>
                   <Route exact path="/artist/:id" component={Artist}></Route>
+                  <Route exact path="/mv/:id" component={MV}></Route>
                   <Route component={PageNotFound}></Route>
                 </Switch>
               </Discovery>

@@ -23,6 +23,7 @@ class Artist extends Component {
 
     componentDidMount() {
         const artistId = this.props.match.params.id;
+        console.log(artistId);
         // 歌手详情
         artistDetail(artistId).then(result => {
             this.setState({
