@@ -20,7 +20,7 @@ function AlbumHeader(props) {
                 {...ShowHeaderProps}
                 children={
                     <div className="artist">
-                        <span>歌手：<Link href="/">{artist.name}</Link></span>
+                        <span>歌手：<Link to={`/artist/${artist.id}`}>{artist.name}</Link></span>
                         <span>发行时间：{new Date(publishTime).toLocaleDateString()}</span>
                         <span>发行公司：{company}</span>
                     </div>

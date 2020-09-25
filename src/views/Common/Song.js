@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { songDetail } from '../../api/common';
 import SongHeader from '../../components/discovery/SongHeader';
 
-class Album extends Component {
+class Song extends Component {
     constructor() {
         super()
         this.state = {
@@ -43,4 +43,4 @@ class Album extends Component {
     }
 }
 
-export default withRouter(Album);
+export default withRouter(Song);

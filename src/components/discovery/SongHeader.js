@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
-import { Image } from 'antd';
 import { Link } from 'react-router-dom';
 import ShowHeader from '../common/ShowHeader';
 import { PlayCircleTwoTone } from '@ant-design/icons';
+import Track from '../common/Track';
 import './SongHeader.scss'
 
 /**
@@ -19,9 +19,8 @@ function SongHeader(props) {
      */
     const handleArtists = (artists) => {
         return artists.map((artist, index) => (
-            // TODO 待艺人页面完成
-            <Fragment>
-                <Link href="/" key={index} className="artists-name">{artist.name}</Link>{ index === artists.length-1 ? '' : '/' }
+            <Fragment key={index}>
+                <Link to={`/artist/${artist.id}`} className="artists-name">{artist.name}</Link>{ index === artists.length-1 ? '' : '/' }
             </Fragment>
         ))
     }
@@ -40,7 +39,7 @@ function SongHeader(props) {
     return (
         <Fragment>
             <ShowHeader
-                cover={<Image width="200px" src={coverImgUrl} alt="Cover"></Image>}
+                cover={<Track src={coverImgUrl}></Track>}
                 icon={<PlayCircleTwoTone />}
                 {...ShowHeaderProps}
                 children={

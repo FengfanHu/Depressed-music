@@ -1,0 +1,15 @@
+.cover {
+    z-index: 1;
+    top: 28px;
+    left: 28px;
+    width: 150px;
+    height: 150px;
+}
+.cover-bg {
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    width: 205px;
+    height: 205px;
+    background: url('https://s2.music.126.net/style/web2/img/ie6/singlecover.png?ac1e95117735e94a597caea6cd646d6') no-repeat;
+}

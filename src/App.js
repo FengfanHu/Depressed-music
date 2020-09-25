@@ -9,7 +9,7 @@ import Rank from './views/Discovery/Rank';
 import PlayList from './views/Common/PlayList';
 import Album from './views/Common/Album';
 import Song from './views/Common/Song';
-import Singer from './views/Discovery/Singer';
+import Artist from './views/Common/Artist';
 import PageNotFound from './views/404';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
                   <Route exact path="/playlist/:id" component={PlayList}></Route>
                   <Route exact path="/album/:id" component={Album}></Route>
                   <Route exact path="/song/:id" component={Song}></Route>
-                  <Route exact path="/singer" component={Singer}></Route>
+                  <Route exact path="/artist/:id" component={Artist}></Route>
                   <Route component={PageNotFound}></Route>
                 </Switch>
               </Discovery>

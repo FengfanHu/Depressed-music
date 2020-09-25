@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row, Col, PageHeader, Skeleton } from 'antd';
-import './ShowHeader.scss'
 
 /**
  * 歌单头部
@@ -8,15 +7,15 @@ import './ShowHeader.scss'
  */
 function ShowHeader(props) {
     return (
-        <Row className="playlist-content">
-            <Col span={6}>
+        <Row style={{ padding: '30px 30px', paddingBottom: '15px' }} justify="center">
+            <Col span={7}>
                 {
                     props.cover
                     ? props.cover
                     : <Skeleton.Image style={{ width: "200px", height: "200px"}} />
                 }
             </Col>
-            <Col span={15} style={{ padding: '0px 10px' }}>
+            <Col span={14} style={{ padding: '0px 10px' }}>
                 <PageHeader
                     style={{ paddingTop: 0 }}
                     title={props.name}
