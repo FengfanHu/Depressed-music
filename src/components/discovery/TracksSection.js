@@ -9,7 +9,7 @@ import Songs from '../common/Songs';
 function TracksSection(props) {
 
     return (
-        <Section {...props}>
+        <Section {...props} padding="0px 60px">
             <Songs {...props}></Songs>
         </Section>
     )

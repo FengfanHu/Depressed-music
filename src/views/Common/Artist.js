@@ -76,10 +76,10 @@ class Artist extends Component {
                         <Songs list={hotSongs}></Songs>
                     </TabPane>
                     <TabPane tab="所有专辑" key="2">
-                        <Cards pagination={{ pageSize: 12, simple: true }} column={4} list={hotAlbums} type="album"></Cards>
+                        <Cards pagination={{ pageSize: 12, simple: true }} column={4} list={hotAlbums} type="album" imgProp="picUrl"></Cards>
                     </TabPane>
                     <TabPane tab="相关MV" key="3">
-                        <Cards pagination={{ pageSize: 12, simple: true }} column={4} list={mvs} type="mv"></Cards>
+                        <Cards pagination={{ pageSize: 12, simple: true }} column={4} list={mvs} type="mv" imgProp="imgurl"></Cards>
                     </TabPane>
                     <TabPane tab="艺人介绍" key="4">
                         <ArtistDesc introduction={introduction}></ArtistDesc>

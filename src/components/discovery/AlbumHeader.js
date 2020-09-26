@@ -26,7 +26,7 @@ function AlbumHeader(props) {
                     </div>
                 }>
             </ShowHeader>
-            <Collapse ghost style={{ padding: '0px 15px'}}>
+            <Collapse ghost>
                 <Panel header="专辑介绍">
                     <p className="description">
                         { description.split('\n').map((paragraph, index) => 

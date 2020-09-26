@@ -4,9 +4,9 @@ import { PageHeader, Divider, Skeleton } from 'antd';
 function Section(props) {
     return (
         <PageHeader
-            style={{ padding: '10px 30px' }}
+            style={{ padding: props.padding ? props.padding : '10px 30px' }}
             title={props.title}
-            avatar={{ icon: props.icon, style: {backgroundColor: '#fff'} }}>
+            avatar={{ icon: props.icon, style: {backgroundColor: '#fff', fontSize: '24px'} }}>
                 <Skeleton loading={props.list.length === 0}>
                     {props.children}
                 </Skeleton>

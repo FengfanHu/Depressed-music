@@ -30,7 +30,7 @@ class Mv extends Component {
         const { mv } = this.state;
         return (
             <Fragment>
-                <Section icon={<PlaySquareTwoTone />} title="MV" list={['mv']}>
+                <Section icon={<PlaySquareTwoTone/>} title="MV" list={['mv']}>
                     <video controls autoPlay name="media" src={mv.url} width="100%"></video>
                 </Section>
             </Fragment>

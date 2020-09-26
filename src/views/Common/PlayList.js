@@ -41,7 +41,7 @@ class PlayList extends Component {
         return (
             <Fragment>
                 <PlaylistHeader {...headerProps}></PlaylistHeader>
-                <TracksSection title="歌曲列表" list={tracks} icon={<CustomerServiceTwoTone />} ></TracksSection>
+                <TracksSection title="歌曲列表" list={tracks} icon={<CustomerServiceTwoTone />}></TracksSection>
             </Fragment>
         )
     }

@@ -18,7 +18,7 @@ function Cards(props) {
                     dataSource={ props.list }
                     renderItem={item => (
                         <Card
-                            cover={<img alt={item.name} src={ props.type === 'mv' ? item.imgurl : item.picUrl} />}
+                            cover={<img alt={item.name} src={ item[props.imgProp] } />}
                             className="card"
                             hoverable
                             onClick={goto.bind(this, props.type, item.id)}>

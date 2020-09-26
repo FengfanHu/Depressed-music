@@ -7,7 +7,12 @@ function RecommendSection(props) {
 
     return (
         <Section {...props} icon={<CustomerServiceTwoTone />}>
-            <Cards list={props.list} type={props.type} column={5}></Cards>
+            <Cards
+                imgProp={props.imgProp ? props.imgProp : 'picUrl'}
+                list={props.list}
+                type={props.type}
+                column={props.pagination ? props.pagination.pageSize : 5}
+                pagination={props.pagination} ></Cards>
         </Section>
     )
 }

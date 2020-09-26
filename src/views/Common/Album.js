@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { albumDetail } from '../../api/common';
 import TracksSection from '../../components/discovery/TracksSection';
 import AlbumHeader from '../../components/discovery/AlbumHeader';
+import { CustomerServiceTwoTone } from '@ant-design/icons';
 
 class Album extends Component {
     constructor() {
@@ -42,7 +43,7 @@ class Album extends Component {
         return (
             <Fragment>
                 <AlbumHeader {...headerProps}></AlbumHeader>
-                <TracksSection title="专辑包含歌曲" list={songs} ></TracksSection>
+                <TracksSection title="专辑包含歌曲" list={songs} icon={<CustomerServiceTwoTone />}></TracksSection>
             </Fragment>
         )
     }

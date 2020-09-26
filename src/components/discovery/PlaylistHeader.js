@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import { Image, Avatar, Collapse } from 'antd';
 import ShowHeader from '../common/ShowHeader';
 import { ProfileTwoTone } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import './PlaylistHeader.scss'
 const { Panel } = Collapse;
 
@@ -20,19 +21,23 @@ function PlaylistHeader(props) {
                 <Fragment>
                     <div className="creator">
                         <Avatar shape="square" src={creator.avatarUrl}></Avatar>
-                        <a href="/">{creator.nickname}</a>
+                        <Link to={`/user/${creator.userId}`}>{creator.nickname}</Link>
                         <span>{new Date(createTime).toLocaleDateString()} 创建</span>
                     </div>
                     <Collapse ghost>
                         <Panel header="简介">
                             <p className="description">
-                                { description.split('\n').map((paragraph, index) => 
+                                {
+                                    description
+                                    ? description.split('\n').map((paragraph, index) => 
                                     (
                                         <Fragment key={index}>
                                             {paragraph}
                                             <br></br>
                                         </Fragment>
-                                    ))}
+                                    ))
+                                    : '暂无简介'
+                                }
                             </p>
                         </Panel>
                     </Collapse>
