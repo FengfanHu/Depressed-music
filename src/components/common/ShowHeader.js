@@ -7,7 +7,7 @@ import { Row, Col, PageHeader, Skeleton } from 'antd';
  */
 function ShowHeader(props) {
     return (
-        <Row style={{ padding: '30px 30px' }} justify="center">
+        <Row style={{ padding: props.padding ? props.padding : '30px 30px', marginBottom: props.marginBottom ? props.marginBottom : '0px' }} justify="center">
             <Col span={7}>
                 {
                     props.cover

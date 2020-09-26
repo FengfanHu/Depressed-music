@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { playlistDetail } from '../../api/common';
-import TracksSection from '../../components/discovery/TracksSection';
-import PlaylistHeader from '../../components/discovery/PlaylistHeader';
+import { playlistDetail, playlistComments } from '../../api/playlist';
+import TracksSection from '../../components/song/TracksSection';
+import PlaylistHeader from '../../components/playlist/PlaylistHeader';
+import Comments from '../../components/common/Comments';
 import { CustomerServiceTwoTone } from '@ant-design/icons';
 
 class PlayList extends Component {
@@ -15,6 +16,9 @@ class PlayList extends Component {
             coverImgUrl: '',
             description: '',
             createTime: 0,
+            hotComments: [],
+            comments: [],
+            commentCount: 0,
         }
     }
 
@@ -34,14 +38,25 @@ class PlayList extends Component {
                 this.props.history.push('/404');
             }
         });
+        // 评论
+        playlistComments(playlistId).then(result => {
+            this.setState({
+                hotComments: result.data.hotComments,
+                comments: result.data.comments,
+                commentCount: result.data.total
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
-        const {tracks, ...headerProps} = this.state;
+        const {tracks, hotComments, comments, commentCount, ...headerProps} = this.state;
         return (
             <Fragment>
                 <PlaylistHeader {...headerProps}></PlaylistHeader>
                 <TracksSection title="歌曲列表" list={tracks} icon={<CustomerServiceTwoTone />}></TracksSection>
+                <Comments subTitle={`共${commentCount}条评论`} list={comments} comments={comments} hotComments={hotComments} />
             </Fragment>
         )
     }

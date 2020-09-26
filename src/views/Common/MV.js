@@ -1,14 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { MVDetail } from '../../api/common';
+import { MVDetail, MVComments } from '../../api/mv';
 import Section from '../../components/common/Section';
+import Comments from '../../components/common/Comments';
 import { PlaySquareTwoTone } from '@ant-design/icons';
 
 class Mv extends Component {
     constructor() {
         super()
         this.state = {
-            mv: {}
+            mv: {},
+            hotComments: [],
+            comments: [],
+            commentCount: 0
         }
     }
 
@@ -24,15 +28,29 @@ class Mv extends Component {
                 this.props.history.push('/404');
             }
         });
+        // 评论
+        MVComments(mvId).then(result => {
+            this.setState({
+                hotComments: result.data.hotComments,
+                comments: result.data.comments,
+                commentCount: result.data.total
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
-        const { mv } = this.state;
+        const { mv, commentCount, comments, hotComments } = this.state;
         return (
             <Fragment>
                 <Section icon={<PlaySquareTwoTone/>} title="MV" list={['mv']}>
                     <video controls autoPlay name="media" src={mv.url} width="100%"></video>
                 </Section>
+                <Comments
+                    padding="0px 40px"
+                    subTitle={`共${commentCount}条评论`} list={comments}
+                    comments={comments} hotComments={hotComments} />
             </Fragment>
         )
     }

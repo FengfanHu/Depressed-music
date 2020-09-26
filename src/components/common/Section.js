@@ -6,6 +6,7 @@ function Section(props) {
         <PageHeader
             style={{ padding: props.padding ? props.padding : '10px 30px' }}
             title={props.title}
+            subTitle={props.subTitle ? props.subTitle : ''}
             avatar={{ icon: props.icon, style: {backgroundColor: '#fff', fontSize: '24px'} }}>
                 <Skeleton loading={props.list.length === 0}>
                     {props.children}

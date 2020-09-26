@@ -1,13 +1,5 @@
 import request from '../utils/axios';
 
-export const playlistDetail = (id) => request.request({
-    method: 'GET',
-    url: '/playlist/detail',
-    params: {
-        id
-    }
-})
-
 export const albumDetail = (id) => request.request({
     method: 'GET',
     url: '/album',
@@ -16,25 +8,9 @@ export const albumDetail = (id) => request.request({
     }
 })
 
-export const MVDetail = (id) => request.request({
+export const albumComments = (id) => request.request({
     method: 'GET',
-    url: '/mv/url',
-    params: {
-        id
-    }
-})
-
-export const songDetail = (ids) => request.request({
-    method: 'GET',
-    url: '/song/detail',
-    params: {
-        ids
-    }
-})
-
-export const getLyric = (id) => request.request({
-    method: 'GET',
-    url: '/lyric',
+    url: '/comment/album',
     params: {
         id
     }

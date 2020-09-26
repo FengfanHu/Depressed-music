@@ -39,6 +39,7 @@ function SongHeader(props) {
     return (
         <Fragment>
             <ShowHeader
+                marginBottom="70px"
                 cover={<Track src={coverImgUrl}></Track>}
                 icon={<PlayCircleTwoTone />}
                 {...ShowHeaderProps}

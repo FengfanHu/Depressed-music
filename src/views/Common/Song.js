@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { songDetail } from '../../api/common';
-import SongHeader from '../../components/discovery/SongHeader';
+import { songDetail, songComments } from '../../api/song';
+import SongHeader from '../../components/song/SongHeader';
+import Comments from '../../components/common/Comments';
 
 class Song extends Component {
     constructor() {
@@ -12,6 +13,9 @@ class Song extends Component {
             album: '',
             coverImgUrl: '',
             time: 0,
+            commentCount: 0,
+            comments: [],
+            hotComments: []
         }
     }
 
@@ -31,13 +35,27 @@ class Song extends Component {
                 this.props.history.push('/404');
             }
         });
+        // 评论
+        songComments(songId).then(result => {
+            this.setState({
+                hotComments: result.data.hotComments,
+                comments: result.data.comments,
+                commentCount: result.data.total
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
-        const {songs, ...headerProps} = this.state;
+        const {songs, commentCount, comments, hotComments, ...headerProps} = this.state;
         return (
             <Fragment>
-                <SongHeader {...headerProps}></SongHeader>
+                <SongHeader {...headerProps} ></SongHeader>
+                <Comments
+                    padding="0px 70px"
+                    subTitle={`共${commentCount}条评论`} list={comments}
+                    comments={comments} hotComments={hotComments} />
             </Fragment>
         )
     }
