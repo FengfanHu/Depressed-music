@@ -16,7 +16,7 @@ function UserHeader(props) {
         <ShowHeader
             subTitle={`Lv.${level}`}
             cover={<Image src={avatarUrl} alt="Cover" width="200px" />}
-            icon={gender===1 ? <ManOutlined style={{ color: '#1890ff' }} /> : <WomanOutlined style={{ color: '#1890ff' }} />}
+            icon={gender === 1 ? <ManOutlined style={{ color: '#1890ff' }} /> : <WomanOutlined style={{ color: '#ff85c0' }} />}
             name={nickname}>
             <Row gutter={30}>
                 <Col><Statistic title="关注" value={follows} className="statistic"></Statistic></Col>

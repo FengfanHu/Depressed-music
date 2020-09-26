@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { albumDetail, albumComments } from '../../api/common';
+import { albumDetail, albumComments } from '../../api/album';
 import TracksSection from '../../components/song/TracksSection';
 import AlbumHeader from '../../components/album/AlbumHeader';
 import Comments from '../../components/common/Comments';

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { artistDetail, artistAlbum, artistDesc, artistMV } from '../../api/artist';
 import ArtistHeader from '../../components/artist/ArtistHeader';
 import ArtistDesc from '../../components/artist/ArtistDesc';
@@ -70,7 +70,10 @@ class Artist extends Component {
         const { artist, hotSongs, hotAlbums, introduction, mvs } = this.state;
         return (
             <Fragment>
-                <ArtistHeader {...artist}></ArtistHeader>
+                <ArtistHeader
+                    {...artist} 
+                    subTitle={ artist.accountId ? <Link to={`/user/${artist.accountId}`}>个人主页</Link> : ''}>
+                </ArtistHeader>
                 <Tabs size="large" style={{ padding: '10px 70px' }}>
                     <TabPane tab="热门歌曲" key="1">
                         <Songs list={hotSongs}></Songs>

@@ -9,13 +9,14 @@ const { Paragraph } = Typography;
  * @param { name, img1v1Url, alias, musicSize, albumSize, briefDesc } props 
  */
 function ArtistHeader(props) {
-    const { name, img1v1Url, alias, musicSize, albumSize, briefDesc } = props;
+    const { name, img1v1Url, alias, musicSize, albumSize, briefDesc, subTitle } = props;
     return (
         <Fragment>
             <ShowHeader
                 name={name}
                 icon={<IdcardTwoTone />}
                 cover={<Image src={img1v1Url} />}
+                subTitle={subTitle}
                 >
                 <span style={{ display: 'block', marginBottom: '5px' }}>{ alias.length > 0 ? alias.join('/') : name }共有{musicSize}首歌，发布了{albumSize}张专辑</span>
                 <span style={{ display: 'block', marginBottom: '5px' }}>
