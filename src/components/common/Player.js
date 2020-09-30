@@ -111,10 +111,10 @@ class Player extends Component {
                         <Col span={15}>
                             <Row align="middle">
                                 <Col span={3}>
-                                    <Image src={currentSong.img} className="image"></Image>
+                                    <Image src={currentSong ? currentSong.img : ''} loading={!currentSong} className="image"></Image>
                                 </Col>
                                 <Col span={20}>
-                                    <span>{currentSong.name}</span>
+                                    <span>{currentSong ? currentSong.name : ''}</span>
                                     <Slider
                                         min={0}
                                         max={duration}
