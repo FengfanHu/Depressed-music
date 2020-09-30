@@ -55,7 +55,7 @@ class Album extends Component {
         const {songs, comments, commentCount, hotComments, ...headerProps} = this.state;
         return (
             <Fragment>
-                <AlbumHeader {...headerProps}></AlbumHeader>
+                <AlbumHeader list={songs} {...headerProps}></AlbumHeader>
                 <TracksSection title="专辑包含歌曲" list={songs} icon={<CustomerServiceTwoTone />}></TracksSection>
                 <Comments
                     padding="0px 70px"

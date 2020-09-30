@@ -3,6 +3,7 @@ import { Image, Collapse } from 'antd';
 import { Link } from 'react-router-dom';
 import ShowHeader from '../common/ShowHeader';
 import { PlayCircleTwoTone } from '@ant-design/icons';
+import  ButtonGroup from '../common/ButtonGroup';
 import './AlbumHeader.scss'
 const { Panel } = Collapse;
 
@@ -12,6 +13,17 @@ const { Panel } = Collapse;
  */
 function AlbumHeader(props) {
     const { artist, company, coverImgUrl, description, publishTime, ...ShowHeaderProps} = props;
+
+    const handleTracks = (tracks) => {
+        return tracks.map(track => {
+            return {
+                id: track.id,
+                name: track.name,
+                img: track.al.picUrl
+            }
+        });
+    }
+
     return (
         <Fragment>
             <ShowHeader
@@ -19,11 +31,14 @@ function AlbumHeader(props) {
                 icon={<PlayCircleTwoTone />}
                 {...ShowHeaderProps}
                 children={
-                    <div className="artist">
-                        <span>歌手：<Link to={`/artist/${artist.id}`}>{artist.name}</Link></span>
-                        <span>发行时间：{new Date(publishTime).toLocaleDateString()}</span>
-                        <span>发行公司：{company}</span>
-                    </div>
+                    <Fragment>
+                        <div className="artist">
+                            <span>歌手：<Link to={`/artist/${artist.id}`}>{artist.name}</Link></span>
+                            <span>发行时间：{new Date(publishTime).toLocaleDateString()}</span>
+                            <span>发行公司：{company}</span>
+                        </div>
+                        <ButtonGroup list={handleTracks(props.list)}></ButtonGroup>
+                    </Fragment>
                 }>
             </ShowHeader>
             <Collapse ghost style={{ padding: '0px 60px' }}>

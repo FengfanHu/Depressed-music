@@ -1,11 +1,10 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
-import { changeSong, showPlayer, setIsPlay } from '../../redux/action';
-import { songUrl } from '../../api/song';
-import { Affix, Row, Col, Layout, message, Button, Tooltip, Slider } from 'antd';
+import { Affix, Row, Col, Layout, message, Button, Tooltip, Slider, Image } from 'antd';
 import { StepBackwardFilled, StepForwardFilled, PlayCircleOutlined,
     UnorderedListOutlined, PauseOutlined, SoundOutlined } from '@ant-design/icons';
 import './Player.scss';
+import { mapDispatchToProps } from '../../redux/dispatch';
 
 const { Footer } = Layout;
 
@@ -14,7 +13,10 @@ class Player extends Component {
         super()
         this.audio = createRef();
         this.state = {
-            volume: 0.5
+            volume: 0.5,
+            showVolume: false,
+            duration: 0,
+            currentTime: 0,
         }
     }
 
@@ -32,7 +34,16 @@ class Player extends Component {
         }
         // 播放
         audio.onplay = () => {
+            this.setState({
+                duration: audio.duration
+            });
             onPauseOrPlay(true);
+        }
+        // timeupdate Event
+        audio.ontimeupdate = () => {
+            this.setState({
+                currentTime: audio.currentTime
+            });
         }
     }
 
@@ -40,7 +51,11 @@ class Player extends Component {
         const step = next ? 1 : -1;
         const currentSongId = this.props.songs.findIndex((item) => item.id === this.props.song.id);
         const nextSong = this.props.songs[currentSongId+step];
-        nextSong ? this.props.onChangeSong(nextSong.id) : message.info('没歌放了喔(⊙_⊙)');
+        // 超出数组边界
+        if (!nextSong) message.info('没歌放了喔(⊙_⊙)');
+        let result =  this.props.onChangeSong(nextSong.id);
+        // !无权播放歌曲 继续播放下一首/上一首
+        if (!result) this.onStepSong(next);
     }
 
     // 暂停
@@ -57,13 +72,23 @@ class Player extends Component {
     onChangeVolume = (val) => {
         const audio = this.audio.current;
         if (audio) {
-            this.audio.current.volume = val;
+            audio.volume = val;
             this.setState({ volume: val });
         }
     }
 
+    onChangeTime = (val) => {
+        const audio = this.audio.current;
+        if (audio) {
+            audio.currentTime = val;
+            this.setState({ currentTime: val });
+        }
+    }
+
     render() {
-        const { song, showStatus, isPlay, onChangeShowStatus } = this.props;
+        const { song, songs, showStatus, isPlay, onChangeShowStatus } = this.props;
+        const currentSong = songs.find(item => item.id === song.id);
+        const { currentTime, duration, volume, showVolume } = this.state;
         return (
             <Affix offsetBottom={0}>
                 <Footer className="player-warp">
@@ -84,7 +109,22 @@ class Player extends Component {
                             </div>
                         </Col>
                         <Col span={15}>
-                            <Slider></Slider>
+                            <Row align="middle">
+                                <Col span={3}>
+                                    <Image src={currentSong.img} className="image"></Image>
+                                </Col>
+                                <Col span={20}>
+                                    <span>{currentSong.name}</span>
+                                    <Slider
+                                        min={0}
+                                        max={duration}
+                                        value={currentTime}
+                                        step={0.01}
+                                        style={{ margin: 0 }}
+                                        tooltipVisible={false}
+                                        onChange={(val) => this.onChangeTime(val)}></Slider>
+                                </Col>
+                            </Row>
                         </Col>
                         <Col>
                             <Tooltip title="播放列表">
@@ -95,15 +135,18 @@ class Player extends Component {
                                     type="text"></Button>
                             </Tooltip>
                             <Button 
+                                onClick={() => this.setState({ showVolume: !this.state.showVolume })}
                                 shape="circle-outline"
                                 icon={<SoundOutlined />}
                                 type="text"
                             ></Button>
                         </Col>
                         <Col span={2}>
+                            {/* 音量 */}
                             <Slider
+                                style={{ display: showVolume ? 'block' : 'none' }}
                                 onChange={(val) => this.onChangeVolume(val)}
-                                value={this.state.volume}
+                                value={volume}
                                 min={0}
                                 max={1}
                                 step={0.1}
@@ -123,21 +166,6 @@ function mapStateToProps(state) {
         song: state.song,
         songs: state.songs,
         isPlay: state.isPlay
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onChangeSong: async (id) => {
-            const song = await songUrl(id).then(result => result.data.data[0]).catch(err => console.log(err))
-            dispatch(changeSong(song))
-        },
-        onChangeShowStatus: (status) => {
-            dispatch(showPlayer(!status))
-        },
-        onPauseOrPlay: (status) => {
-            dispatch(setIsPlay(status))
-        }
     }
 }
 

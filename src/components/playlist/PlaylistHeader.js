@@ -18,7 +18,8 @@ function PlaylistHeader(props) {
         return tracks.map(track => {
             return {
                 id: track.id,
-                name: track.name
+                name: track.name,
+                img: track.al.picUrl
             }
         });
     }

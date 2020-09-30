@@ -3,8 +3,7 @@ import { Button } from 'antd';
 import { CaretRightOutlined, FolderAddOutlined, ShareAltOutlined } from '@ant-design/icons';
 import './ButtonGroup.scss';
 import { connect } from 'react-redux';
-import { songUrl } from '../../api/song';
-import { changeSong, setSongs } from '../../redux/action';
+import { mapDispatchToProps } from '../../redux/dispatch';
 
 function ButtonGroup(props) {
     return (
@@ -25,20 +24,6 @@ function ButtonGroup(props) {
             icon={<ShareAltOutlined />}>分享</Button>
     </div>
     )
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onChangeSong: async (id) => {
-            const song = await songUrl(id).then(result => result.data.data[0]).catch(err => console.log(err))
-            dispatch(changeSong(song))
-        },
-        onSetSongs: async (songs) => {
-            const song = await songUrl(songs[0].id).then(result => result.data.data[0]).catch(err => console.log(err))
-            dispatch(changeSong(song))
-            dispatch(setSongs(songs))
-        }
-    }
 }
 
 export default connect(null, mapDispatchToProps)(ButtonGroup);

@@ -2,9 +2,9 @@ import React from 'react';
 import { List, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeSong } from '../../redux/action';
-import { songUrl } from '../../api/song';
 import './Songs.scss';
+// Redux
+import { mapDispatchToProps } from '../../redux/dispatch';
 
 function Songs(props) {
 
@@ -30,6 +30,7 @@ function Songs(props) {
             <List.Item
                 className="song-item non-hover"
                 key={item.id}
+                // ! onChangeSong belongs to mapDispatchToProps
                 onClick={() => { props.onChangeSong(item.id) }}>
                 <List.Item.Meta
                     avatar={
@@ -43,15 +44,6 @@ function Songs(props) {
             )}
         />
     )
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        onChangeSong: async (id) => {
-            const song = await songUrl(id).then(result => result.data.data[0]).catch(err => console.log(err))
-            dispatch(changeSong(song))
-        }
-    }
 }
 
 export default connect(null, mapDispatchToProps)(Songs);
