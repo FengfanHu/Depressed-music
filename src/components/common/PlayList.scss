@@ -1,0 +1,24 @@
+.playlist-affix {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    width: 240px;
+    .list {
+        padding: 10px 20px;
+        background-color: #fff;
+        max-height: 400px;
+        overflow-y: scroll;
+        .active {
+            border-left: 3px solid #1890ff;
+            color: #1890ff;
+        }
+    }
+    ::-webkit-scrollbar {
+        width: 5px;
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb
+    {
+        background-color:rgba($color: #d9d9d9, $alpha: 0.9);
+    }
+}

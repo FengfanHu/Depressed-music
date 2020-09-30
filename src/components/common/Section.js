@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageHeader, Divider, Skeleton } from 'antd';
+import { PageHeader, Divider, Empty } from 'antd';
 
 function Section(props) {
     return (
@@ -8,9 +8,11 @@ function Section(props) {
             title={props.title}
             subTitle={props.subTitle ? props.subTitle : ''}
             avatar={{ icon: props.icon, style: {backgroundColor: '#fff', fontSize: '24px'} }}>
-                <Skeleton loading={props.list.length === 0}>
-                    {props.children}
-                </Skeleton>
+                {
+                    props.list.length > 0
+                    ? props.children
+                    : <Empty description={false}></Empty>
+                }
             {
                 props.last
                 ? <Divider style={{ fontSize: '12px', color: '#999999' }}>到底了 ╮(￣▽￣"")╭</Divider>

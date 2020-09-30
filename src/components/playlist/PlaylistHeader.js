@@ -1,8 +1,9 @@
 import React, {Fragment} from 'react';
-import { Image, Avatar, Collapse } from 'antd';
+import { Image, Avatar, Collapse, Skeleton } from 'antd';
 import ShowHeader from '../common/ShowHeader';
 import { ProfileTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import  ButtonGroup from '../common/ButtonGroup';
 import './PlaylistHeader.scss'
 const { Panel } = Collapse;
 
@@ -12,9 +13,23 @@ const { Panel } = Collapse;
  */
 function PlaylistHeader(props) {
     const { coverImgUrl, creator, createTime, description, ...ShowHeaderProps} = props;
+
+    const handleTracks = (tracks) => {
+        return tracks.map(track => {
+            return {
+                id: track.id,
+                name: track.name
+            }
+        });
+    }
+
     return (
         <ShowHeader
-            cover={<Image width="200px" src={coverImgUrl} alt="Cover"></Image>}
+            cover={
+                <Skeleton loading={!coverImgUrl}>
+                    <Image width="200px" src={coverImgUrl} alt="Cover"></Image>
+                </Skeleton>
+            }
             icon={<ProfileTwoTone />}
             {...ShowHeaderProps}
             children={
@@ -24,6 +39,7 @@ function PlaylistHeader(props) {
                         <Link to={`/user/${creator.userId}`}>{creator.nickname}</Link>
                         <span>{new Date(createTime).toLocaleDateString()} 创建</span>
                     </div>
+                    <ButtonGroup list={handleTracks(props.list)}></ButtonGroup>
                     <Collapse ghost>
                         <Panel header="简介">
                             <p className="description">

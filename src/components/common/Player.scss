@@ -1,0 +1,25 @@
+@import '../../views/Index.scss';
+
+.player-warp {
+    height: 60px;
+    background-color: rgba($color: #fff, $alpha: 0.9);
+    box-shadow: 0 -2px 16px rgba(#141414, .1);
+    border-top: 3px solid #1890ff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    @include horizontal_padding();
+    .player-btn-group {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      :hover {
+        color: #1890ff;
+      }
+      .play {
+        font-size: 34px;
+        margin: 0px 8px;
+      }
+    }
+  }

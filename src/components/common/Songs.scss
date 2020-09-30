@@ -1,0 +1,11 @@
+.song-item {
+    cursor: pointer;
+}
+.song {
+    .ant-list-items :hover {
+        box-shadow: 0 3px 16px rgba(#141414, .1);
+    }
+    .ant-list-item :hover {
+        box-shadow: none;
+    }
+}

@@ -1,6 +1,10 @@
 import React from 'react';
 import { List, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { changeSong } from '../../redux/action';
+import { songUrl } from '../../api/song';
+import './Songs.scss';
 
 function Songs(props) {
 
@@ -18,17 +22,19 @@ function Songs(props) {
     return (
         <List
             pagination
+            className="song"
             size="small"
-            className="demo-loadmore-list"
             itemLayout="horizontal"
             dataSource={props.list} // ! list -> tracks
             renderItem={item => (
-            <List.Item key={item.id}>
+            <List.Item
+                className="song-item non-hover"
+                key={item.id}
+                onClick={() => { props.onChangeSong(item.id) }}>
                 <List.Item.Meta
                     avatar={
                     <Avatar src={item.al.picUrl} />
                     }
-                    // TODO 需要艺人界面
                     title={<Link to= {`/song/${item.id}`} >{item.name}</Link>}
                     description={item.ar[0].name}
                 />
@@ -39,4 +45,13 @@ function Songs(props) {
     )
 }
 
-export default Songs;
+function mapDispatchToProps(dispatch) {
+    return {
+        onChangeSong: async (id) => {
+            const song = await songUrl(id).then(result => result.data.data[0]).catch(err => console.log(err))
+            dispatch(changeSong(song))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Songs);

@@ -54,7 +54,7 @@ class PlayList extends Component {
         const {tracks, hotComments, comments, commentCount, ...headerProps} = this.state;
         return (
             <Fragment>
-                <PlaylistHeader {...headerProps}></PlaylistHeader>
+                <PlaylistHeader list={tracks} {...headerProps}></PlaylistHeader>
                 <TracksSection title="歌曲列表" list={tracks} icon={<CustomerServiceTwoTone />}></TracksSection>
                 <Comments subTitle={`共${commentCount}条评论`} list={comments} comments={comments} hotComments={hotComments} />
             </Fragment>

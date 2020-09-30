@@ -13,6 +13,7 @@ class Song extends Component {
             album: '',
             coverImgUrl: '',
             time: 0,
+            id: 0,
             commentCount: 0,
             comments: [],
             hotComments: []
@@ -28,7 +29,8 @@ class Song extends Component {
                 name: song.name,
                 album: song.al,
                 coverImgUrl: song.al.picUrl,
-                time: song.dt
+                time: song.dt,
+                id: song.id
             })
         }).catch(err => {
             if (err.response.status === 404) {
@@ -48,7 +50,7 @@ class Song extends Component {
     }
 
     render() {
-        const {songs, commentCount, comments, hotComments, ...headerProps} = this.state;
+        const { commentCount, comments, hotComments, ...headerProps} = this.state;
         return (
             <Fragment>
                 <SongHeader {...headerProps} ></SongHeader>

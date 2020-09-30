@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Row, Col, Statistic, Divider,Typography } from 'antd';
+import { Image, Row, Col, Statistic, Divider, Typography, Skeleton } from 'antd';
 import ShowHeader from '../common/ShowHeader';
 import { ManOutlined, WomanOutlined } from '@ant-design/icons';
 import './UserHeader.scss';
@@ -15,7 +15,11 @@ function UserHeader(props) {
     return (
         <ShowHeader
             subTitle={`Lv.${level}`}
-            cover={<Image src={avatarUrl} alt="Cover" width="200px" />}
+            cover={
+                <Skeleton loading={!avatarUrl}>
+                    <Image src={avatarUrl} alt="Cover" width="200px" />
+                </Skeleton>
+            }
             icon={gender === 1 ? <ManOutlined style={{ color: '#1890ff' }} /> : <WomanOutlined style={{ color: '#ff85c0' }} />}
             name={nickname}>
             <Row gutter={30}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Avatar, Input } from 'antd';
 import MenuContent from './Menu';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 const {Search} = Input;
@@ -22,7 +23,7 @@ function Header(props) {
             <Row gutter={5} justify="space-between">
                 {/* Logo */}
                 <Col>
-                    <h1><a href="/">Depressed Music</a></h1>
+                    <h1><Link to="/">Depressed Music</Link></h1>
                 </Col>
                 {/* Navigation */}
                 <Col>

@@ -70,18 +70,24 @@ class User extends Component {
                             padding="0px 70px"
                             imgProp="coverImgUrl"
                             title={`${nickname}创建的歌单®️`}
-                            pagination={{ pageSize: 4, simple: true }}
+                            column={4}
+                            pagination={{ pageSize: 8, simple: true }}
                             list={createList}
                             type="playlist">
                         </RecommendSection>
-                        <RecommendSection
-                            padding="0px 70px"
-                            imgProp="coverImgUrl"
-                            title={`${nickname}收藏的歌单®️`}
-                            pagination={{ pageSize: 4, simple: true }}
-                            list={collectList}
-                            type="playlist">
-                        </RecommendSection>
+                        {
+                            collectList.length > 0
+                            ? <RecommendSection
+                                padding="0px 70px"
+                                imgProp="coverImgUrl"
+                                title={`${nickname}收藏的歌单®️`}
+                                column={4}
+                                pagination={{ pageSize: 4, simple: true }}
+                                list={collectList}
+                                type="playlist">
+                            </RecommendSection>
+                            : ''
+                        }
                     </Fragment>
                 }
             </Fragment>

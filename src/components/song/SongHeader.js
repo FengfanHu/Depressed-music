@@ -1,17 +1,18 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import ShowHeader from '../common/ShowHeader';
 import { PlayCircleTwoTone } from '@ant-design/icons';
 import Track from '../common/Track';
+import ButtonGroup from '../common/ButtonGroup';
 import './SongHeader.scss'
 
 /**
- * 歌单头部
- * @param {artist, coverImgUrl, album, time, name} props 
+ * 歌曲头部
+ * @param {artist, coverImgUrl, album, time, name, id} props 
  */
 function SongHeader(props) {
 
-    const { artists, coverImgUrl, album, time, ...ShowHeaderProps} = props;
+    const { artists, coverImgUrl, album, time, id, ...ShowHeaderProps } = props;
 
     /**
      * 处理歌手
@@ -44,10 +45,13 @@ function SongHeader(props) {
                 icon={<PlayCircleTwoTone />}
                 {...ShowHeaderProps}
                 children={
-                    <div className="artist">
-                        <span>歌手：{handleArtists(artists)}</span>
-                        <span>歌曲时长：{handleTime(time)}</span>
-                    </div>
+                    <Fragment>
+                        <div className="artist">
+                            <span>歌手：{handleArtists(artists)}</span>
+                            <span>歌曲时长：{handleTime(time)}</span>
+                        </div>
+                        <ButtonGroup id={id}></ButtonGroup>
+                    </Fragment>
                 }>
             </ShowHeader>
         </Fragment>

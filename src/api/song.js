@@ -23,3 +23,11 @@ export const getLyric = (id) => request.request({
         id
     }
 })
+
+export const songUrl = (id) => request.request({
+    method: 'GET',
+    url: '/song/url',
+    params: {
+        id
+    }
+})
