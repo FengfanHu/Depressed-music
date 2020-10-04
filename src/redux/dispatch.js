@@ -1,4 +1,4 @@
-import { changeSong, showPlayer, setIsPlay, setSongs } from './action';
+import { changeSong, showPlayer, setIsPlay, setSongs, setIsOnline } from './action';
 import { songUrl } from '../api/song';
 import { message } from 'antd';
 
@@ -6,7 +6,7 @@ export function mapDispatchToProps(dispatch) {
     const onChangeSong = async (id) => {
         const song = await songUrl(id).then(result => result.data.data[0]).catch(err => console.log(err))
         // 歌曲权限不足时，URL为空
-        if (!song.url) {
+        if (!song || !song.url) {
             message.warning('此歌曲无权播放╮(￣▽￣"")╭')
             return false
         }
@@ -27,6 +27,10 @@ export function mapDispatchToProps(dispatch) {
         dispatch(setIsPlay(status))
     }
 
+    const onSetOnline = (status) => {
+        dispatch(setIsOnline(status))
+    }
+
     return {
         // 当前播放歌曲
         onChangeSong,
@@ -35,6 +39,8 @@ export function mapDispatchToProps(dispatch) {
         //  展示歌曲列表
         onChangeShowStatus,
         // 播放或暂停
-        onPauseOrPlay
+        onPauseOrPlay,
+        // 用户登录或注销
+        onSetOnline
     }
 }

@@ -1,5 +1,19 @@
 import request from '../utils/axios';
 
+export const userLogin = (phone, password) => request.request({
+    method: 'POST',
+    url: '/login/cellphone',
+    params: {
+        phone,
+        password
+    }
+})
+
+export const checkLogin = () => request.request({
+    method: 'GET',
+    url: '/login/status'
+})
+
 export const userDetail = (uid) => request.request({
     method: 'GET',
     url: '/user/detail',

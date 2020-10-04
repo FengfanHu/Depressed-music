@@ -47,15 +47,20 @@ class Player extends Component {
         }
     }
 
-    onStepSong = (next=true) => {
+    onStepSong =  (currentSongId, next=true) => {
+        // * 赋值则递归调用，否则进行初始化操作
+        if (!currentSongId) {
+            currentSongId = this.props.songs.findIndex((item) => item.id === this.props.song.id);            
+        }
         const step = next ? 1 : -1;
-        const currentSongId = this.props.songs.findIndex((item) => item.id === this.props.song.id);
         const nextSong = this.props.songs[currentSongId+step];
         // 超出数组边界
-        if (!nextSong) message.info('没歌放了喔(⊙_⊙)');
-        let result =  this.props.onChangeSong(nextSong.id);
-        // !无权播放歌曲 继续播放下一首/上一首
-        if (!result) this.onStepSong(next);
+        if (!nextSong) return message.info('没歌放了喔(⊙_⊙)');
+        this.props.onChangeSong(nextSong.id)
+            .then(res => {
+                // * 无权播放歌曲 继续播放下一首/上一首
+                if (!res) this.onStepSong(++currentSongId, next);
+            })
     }
 
     // 暂停
@@ -111,7 +116,7 @@ class Player extends Component {
                         <Col span={15}>
                             <Row align="middle">
                                 <Col span={3}>
-                                    <Image src={currentSong ? currentSong.img : ''} loading={!currentSong} className="image"></Image>
+                                    <Image src={currentSong ? currentSong.img : ''} className="image"></Image>
                                 </Col>
                                 <Col span={20}>
                                     <span>{currentSong ? currentSong.name : ''}</span>
