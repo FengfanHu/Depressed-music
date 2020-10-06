@@ -18,6 +18,6 @@ export function setSongs(songs) {
 export function setIsPlay(status) {
 	return {type:ActionTypes.IS_PLAY, status};
 }
-export function setIsOnline(status) {
-	return {type:ActionTypes.IS_ONLINE, status};
+export function setUser(status) {
+	return {type:ActionTypes.USER, status};
 }

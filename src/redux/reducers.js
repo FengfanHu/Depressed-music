@@ -11,13 +11,13 @@ const initialState = {
         song: {},  //当前歌曲
         songs: [],  //歌曲列表
         isPlay: false, //播放状态
-        online: false //登录状态
+        user: {} //登录状态
     };
 
 //用户状态
-function isOnline(status = initialState.online, action) {
+function user(status = initialState.user, action) {
     switch(action.type) {
-        case ActionTypes.IS_ONLINE:
+        case ActionTypes.USER:
             return action.status;
         default:
             return status;
@@ -65,7 +65,7 @@ function songs(songs = initialState.songs, action) {
 }
 //合并Reducer
 const reducer = combineReducers({
-    isOnline,
+    user,
     isPlay,
     showStatus,
     song,

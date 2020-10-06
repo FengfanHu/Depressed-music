@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { mapStateToProps } from '../redux/dispatch';
+import NotAuthorized from './403';
 
-function My() {
+function My(props) {
+    const { user } = props;
     return (
-        <div>My</div>
+        <Fragment>
+            {
+                Object.keys(user).length > 0
+                ? <Redirect to={`/user/${user.userId}`}></Redirect>
+                : <NotAuthorized></NotAuthorized>
+            }
+        </Fragment>
     );
 }
 
-export default My;
+export default connect(mapStateToProps, null)(My);

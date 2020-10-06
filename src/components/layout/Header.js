@@ -4,32 +4,27 @@ import { Row, Col, Button, Input, Modal, Form, message, Avatar, Popover } from '
 import MenuContent from './Menu';
 import { Link } from 'react-router-dom';
 import { userLogin, checkLogin, userLogout } from '../../api/user';
-import { mapDispatchToProps } from '../../redux/dispatch';
+import { mapStateToProps, mapDispatchToProps } from '../../redux/dispatch';
 import './Header.scss';
 
 const {Search} = Input;
 const routers = [
-    { title: '发现音乐', path:'/find' ,children: [
-        { title: '推荐', path: '/'},
-        { title: '排行榜', path: '/rank'},
-        { title: '歌单', path: '/playlist'},
-        { title: '歌手', path: '/singer'}
-    ]},
+    { title: '发现音乐', path:'/'},
     { title: '我的音乐', path: '/my'},
     { title: '朋友圈', path: '/friends'}
 ]
 
 
-function Header() {
+function Header(props) {
     const [showModal, setShowModal] = useState(false);
-    const [user, setUser] = useState(undefined);
     const [form] = Form.useForm();
+    const { user, onSetUser } = props;
 
     useEffect(() => {
         checkLogin()
-            .then(res => setUser(res.data.profile))
+            .then(res => onSetUser(res.data.profile))
             .catch(err => console.log(err));
-    }, []);
+    }, [onSetUser]);
 
     // 用户登录触发
     const onUserLogin = () => {
@@ -42,7 +37,7 @@ function Header() {
                             return message.warning(data.msg);
                         }
                         message.success('登录成功');
-                        setUser(data.profile);
+                        onSetUser(data.profile);
                         setShowModal(false);
                     })
                 }
@@ -63,7 +58,7 @@ function Header() {
         userLogout()
             .then(res => {
                 if (res.data.code === 200) message.success('退出成功');
-                setUser(undefined);
+                onSetUser({});
             })
             .catch(err => console.log(err));
     }
@@ -83,7 +78,7 @@ function Header() {
                 <Col>
                     <Search placeholder="搜索歌曲/歌单" className="search"></Search>
                     {
-                        user
+                        Object.keys(user).length > 0
                         ? <Popover
                             content={<Button type="text" danger onClick={() => {onUserLogout()}}>退出</Button>}>
                             <Link to={`/user/${user.userId}`}>
@@ -128,4 +123,4 @@ function Header() {
     )
 }
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

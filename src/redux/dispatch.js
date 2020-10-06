@@ -1,4 +1,4 @@
-import { changeSong, showPlayer, setIsPlay, setSongs, setIsOnline } from './action';
+import { changeSong, showPlayer, setIsPlay, setSongs, setUser } from './action';
 import { songUrl } from '../api/song';
 import { message } from 'antd';
 
@@ -27,8 +27,8 @@ export function mapDispatchToProps(dispatch) {
         dispatch(setIsPlay(status))
     }
 
-    const onSetOnline = (status) => {
-        dispatch(setIsOnline(status))
+    const onSetUser = (status) => {
+        dispatch(setUser(status))
     }
 
     return {
@@ -41,6 +41,16 @@ export function mapDispatchToProps(dispatch) {
         // 播放或暂停
         onPauseOrPlay,
         // 用户登录或注销
-        onSetOnline
+        onSetUser
+    }
+}
+
+export function mapStateToProps(state) {
+    return {
+        showStatus: state.showStatus, 
+        song: state.song,
+        songs: state.songs,
+        isPlay: state.isPlay,
+        user: state.user
     }
 }

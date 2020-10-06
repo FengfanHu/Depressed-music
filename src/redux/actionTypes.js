@@ -9,4 +9,4 @@ export const SET_SONGS = "SET_SONGS";
 //设置播放器
 export const IS_PLAY = "IS_PLAY";
 //设置用户状态
-export const IS_ONLINE = "IS_ONLINE";
+export const USER = "USER";

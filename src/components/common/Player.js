@@ -4,7 +4,7 @@ import { Affix, Row, Col, Layout, message, Button, Tooltip, Slider, Image } from
 import { StepBackwardFilled, StepForwardFilled, PlayCircleOutlined,
     UnorderedListOutlined, PauseOutlined, SoundOutlined } from '@ant-design/icons';
 import './Player.scss';
-import { mapDispatchToProps } from '../../redux/dispatch';
+import { mapStateToProps ,mapDispatchToProps } from '../../redux/dispatch';
 
 const { Footer } = Layout;
 
@@ -104,7 +104,7 @@ class Player extends Component {
                             autoPlay></audio>
                         <Col span={3} offset={1}>
                             <div className="player-btn-group">
-                                <StepBackwardFilled onClick={()=> this.onStepSong(false)}/>
+                                <StepBackwardFilled onClick={()=> this.onStepSong(undefined, false)}/>
                                     { 
                                         isPlay
                                         ? <PauseOutlined className="play" onClick={this.onPause} />
@@ -163,15 +163,6 @@ class Player extends Component {
         )
     }
 
-}
-
-function mapStateToProps(state) {
-    return {
-        showStatus: state.showStatus, 
-        song: state.song,
-        songs: state.songs,
-        isPlay: state.isPlay
-    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);
