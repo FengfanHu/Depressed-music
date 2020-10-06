@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Card, List, Empty } from 'antd';
 import { withRouter } from 'react-router-dom';
+import Cover from './Cover';
 import './Cards.scss';
 
 function Cards(props) {
@@ -8,21 +9,6 @@ function Cards(props) {
     const goto = (type, id) => {
         props.history.push(`/${type}/${id}`);
     }
-
-    useEffect(()=> {
-        // 图片懒加载
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.intersectionRatio > 0) {
-                    const img = entry.target;
-                    img.src = img.getAttribute('source');
-                    observer.unobserve(img);
-                }
-            })
-        })
-        const images = Array.from(document.getElementsByClassName('cover'));
-        images.forEach( image => observer.observe(image));
-    }, [])
 
     return (
         <Fragment>
@@ -33,7 +19,7 @@ function Cards(props) {
                     dataSource={ props.list }
                     renderItem={item => (
                         <Card
-                            cover={<img className="cover" alt={item.name} source={ item[props.imgProp] } />}
+                            cover={<Cover alt={item.name} src={ item[props.imgProp] } />}
                             className="card"
                             hoverable
                             onClick={goto.bind(this, props.type, item.id)}>
