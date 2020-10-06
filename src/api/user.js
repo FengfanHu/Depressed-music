@@ -29,3 +29,8 @@ export const userPlaylist = (uid) => request.request({
         uid
     }
 })
+
+export const userLogout = () => request.request({
+    method: 'POST',
+    url: '/logout'
+})

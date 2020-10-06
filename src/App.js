@@ -1,17 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Switch, Route, HashRouter } from 'react-router-dom';
 import Discovery from './views/Discovery/Index'
+import LazyLoad from './components/common/LazyLoad';
 import My from './views/My'
 import Friends from './views/Friends'
 import Index from './views/Index';
 import Recommend from './views/Discovery/Recmmend';
 import Rank from './views/Discovery/Rank';
-import PlayList from './views/Common/PlayList';
-import Album from './views/Common/Album';
-import Song from './views/Common/Song';
-import Artist from './views/Common/Artist';
-import MV from './views/Common/MV';
-import User from './views/Common/User';
 import PageNotFound from './views/404';
 
 class App extends Component {
@@ -28,12 +23,12 @@ class App extends Component {
                 <Switch> {/* Child of Discovery */}
                   <Route exact path="/" component={Recommend}></Route>
                   <Route exact path="/rank" component={Rank}></Route>
-                  <Route exact path="/playlist/:id" component={PlayList}></Route>
-                  <Route exact path="/album/:id" component={Album}></Route>
-                  <Route exact path="/song/:id" component={Song}></Route>
-                  <Route exact path="/artist/:id" component={Artist}></Route>
-                  <Route exact path="/mv/:id" component={MV}></Route>
-                  <Route exact path="/user/:id" component={User}></Route>
+                  <Route exact path="/playlist/:id" component={LazyLoad(()=>import('./views/Common/PlayList'))}></Route>
+                  <Route exact path="/album/:id" component={LazyLoad(()=>import('./views/Common/Album'))}></Route>
+                  <Route exact path="/song/:id" component={LazyLoad(()=>import('./views/Common/Song'))}></Route>
+                  <Route exact path="/artist/:id" component={LazyLoad(()=>import('./views/Common/Artist'))}></Route>
+                  <Route exact path="/mv/:id" component={LazyLoad(()=>import('./views/Common/MV'))}></Route>
+                  <Route exact path="/user/:id" component={LazyLoad(()=>import('./views/Common/User'))}></Route>
                   <Route component={PageNotFound}></Route>
                 </Switch>
               </Discovery>

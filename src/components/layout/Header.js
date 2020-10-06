@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Button, Input, Modal, Form, message, Avatar } from 'antd';
+import { Row, Col, Button, Input, Modal, Form, message, Avatar, Popover } from 'antd';
 import MenuContent from './Menu';
 import { Link } from 'react-router-dom';
-import { userLogin, checkLogin } from '../../api/user';
+import { userLogin, checkLogin, userLogout } from '../../api/user';
 import { mapDispatchToProps } from '../../redux/dispatch';
 import './Header.scss';
 
@@ -38,7 +38,12 @@ function Header() {
                 userLogin(val['phone'], val['password'])
                     .then((res) => {
                         const data = res.data;
-                        data.code === 200 ? message.success('登录成功') : message.warning(data.msg);        
+                        if (data.code !== 200) {
+                            return message.warning(data.msg);
+                        }
+                        message.success('登录成功');
+                        setUser(data.profile);
+                        setShowModal(false);
                     })
                 }
             ).catch(err => {
@@ -51,6 +56,16 @@ function Header() {
                 })
             });
 
+    }
+
+    // 用户退出
+    const onUserLogout = () => {
+        userLogout()
+            .then(res => {
+                if (res.data.code === 200) message.success('退出成功');
+                setUser(undefined);
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -69,7 +84,13 @@ function Header() {
                     <Search placeholder="搜索歌曲/歌单" className="search"></Search>
                     {
                         user
-                        ? <Avatar src={user.avatarUrl} title={user.nickname} />
+                        ? <Popover
+                            content={<Button type="text" danger onClick={() => {onUserLogout()}}>退出</Button>}>
+                            <Link to={`/user/${user.userId}`}>
+                                <Avatar src={user.avatarUrl} title={user.nickname}/>
+                            </Link>
+                        </Popover>
+
                         : <Fragment>
                             <Button type="text" onClick={() => setShowModal(true)}>登录</Button>
                             <Modal
